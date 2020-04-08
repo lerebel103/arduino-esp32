@@ -21,7 +21,13 @@
 
 #include <WString.h>
 #include <Stream.h>
+
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 1, 0)
+#include "esp32/rom/md5_hash.h"
+#else
 #include "rom/md5_hash.h"
+#endif
+
 
 class MD5Builder
 {

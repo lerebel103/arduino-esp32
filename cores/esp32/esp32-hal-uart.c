@@ -18,17 +18,24 @@
 #include "freertos/task.h"
 #include "freertos/queue.h"
 #include "freertos/semphr.h"
-#include "rom/ets_sys.h"
 #include "esp_attr.h"
-#include "esp_intr.h"
-#include "rom/uart.h"
 #include "soc/uart_reg.h"
 #include "soc/uart_struct.h"
 #include "soc/io_mux_reg.h"
 #include "soc/gpio_sig_map.h"
 #include "soc/dport_reg.h"
 #include "soc/rtc.h"
+
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 1, 0)
+#include "esp32/rom/uart.h"
+#include "esp32/rom/ets_sys.h"
 #include "esp_intr_alloc.h"
+#else
+#include "rom/uart.h"
+#include "esp_intr.h"
+#include "rom/ets_sys.h"
+#endif
+
 
 #define UART_REG_BASE(u)    ((u==0)?DR_REG_UART_BASE:(      (u==1)?DR_REG_UART1_BASE:(    (u==2)?DR_REG_UART2_BASE:0)))
 #define UART_RXD_IDX(u)     ((u==0)?U0RXD_IN_IDX:(          (u==1)?U1RXD_IN_IDX:(         (u==2)?U2RXD_IN_IDX:0)))
@@ -257,7 +264,7 @@ size_t uartResizeRxBuffer(uart_t * uart, size_t new_size) {
         vQueueDelete(uart->queue);
         uart->queue = xQueueCreate(new_size, sizeof(uint8_t));
         if(uart->queue == NULL) {
-            return NULL;
+            return 0;
         }
     }
     UART_MUTEX_UNLOCK();

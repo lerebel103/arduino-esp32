@@ -16,11 +16,16 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/xtensa_api.h"
 #include "freertos/task.h"
-#include "rom/ets_sys.h"
 #include "soc/timer_group_struct.h"
 #include "soc/dport_reg.h"
-#include "esp_attr.h"
+
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 1, 0)
+#include "esp32/rom/ets_sys.h"
+#include "esp_intr_alloc.h"
+#else
+#include "rom/ets_sys.h"
 #include "esp_intr.h"
+#endif
 
 #define HWTIMER_LOCK()      portENTER_CRITICAL(timer->lock)
 #define HWTIMER_UNLOCK()    portEXIT_CRITICAL(timer->lock)
