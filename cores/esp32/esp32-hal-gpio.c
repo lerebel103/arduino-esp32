@@ -18,15 +18,15 @@
 #include "esp_attr.h"
 #include "esp_idf_version.h"
 
-//#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 1, 0)
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 1, 0)
 #include "esp32/rom/gpio.h"
 #include "esp32/rom/ets_sys.h"
 #include "esp_intr_alloc.h"
-//#else
-//#include "rom/gpio.h"
-//#include "rom/ets_sys.h"
-//#include "esp_intr.h"
-//#endif
+#else
+#include "rom/gpio.h"
+#include "rom/ets_sys.h"
+#include "esp_intr.h"
+#endif
 
 #include "soc/gpio_reg.h"
 #include "soc/io_mux_reg.h"
