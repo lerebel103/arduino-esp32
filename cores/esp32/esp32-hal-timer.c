@@ -19,13 +19,13 @@
 #include "soc/timer_group_struct.h"
 #include "soc/dport_reg.h"
 
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 1, 0)
-#include "esp32/rom/ets_sys.h"
-#include "esp_intr_alloc.h"
-#else
-#include "rom/ets_sys.h"
+//#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 1, 0)
+//#include "esp32/rom/ets_sys.h"
+//#include "esp_intr_alloc.h"
+//#else
+//#include "rom/ets_sys.h"
 #include "esp_intr.h"
-#endif
+//#endif
 
 #define HWTIMER_LOCK()      portENTER_CRITICAL(timer->lock)
 #define HWTIMER_UNLOCK()    portEXIT_CRITICAL(timer->lock)

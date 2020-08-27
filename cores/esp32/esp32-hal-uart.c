@@ -26,15 +26,15 @@
 #include "soc/dport_reg.h"
 #include "soc/rtc.h"
 
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 1, 0)
-#include "esp32/rom/uart.h"
-#include "esp32/rom/ets_sys.h"
-#include "esp_intr_alloc.h"
-#else
+//#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 1, 0)
+//#include "esp32/rom/uart.h"
+//#include "esp32/rom/ets_sys.h"
+//#include "esp_intr_alloc.h"
+//#else
 #include "rom/uart.h"
 #include "esp_intr.h"
 #include "rom/ets_sys.h"
-#endif
+//#endif
 
 
 #define UART_REG_BASE(u)    ((u==0)?DR_REG_UART_BASE:(      (u==1)?DR_REG_UART1_BASE:(    (u==2)?DR_REG_UART2_BASE:0)))
